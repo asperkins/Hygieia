@@ -71,7 +71,9 @@ dbpassword=${HYGIEIA_API_ENV_SPRING_DATA_MONGODB_PASSWORD:-dbpass}
 jenkins.cron=${JENKINS_CRON:-0 0/5 * * * *}
 
 #Jenkins server (required) - Can provide multiple
-jenkins.servers[0]=${JENKINS_MASTER:-http://jenkins.company.com}
+jenkins.servers[0]=${JENKINS_MASTER0:-http://jenkins.company.com}
+jenkins.servers[1]=${JENKINS_MASTER1:-http://jenkins.company.com}
+jenkins.servers[2]=${JENKINS_MASTER2:-http://jenkins.company.com}
 
 #Another option: If using same username/password Jenkins auth - set username/apiKey to use HTTP Basic Auth (blank=no auth)
 jenkins.username=${JENKINS_USERNAME}
