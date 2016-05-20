@@ -14,7 +14,7 @@
         var currentDownEnvironments = [];
 
         // list of valid environments to validate and build data
-        var validMappings = ['dev', 'qa', 'int', 'perf', 'prod'];
+        var validMappings = ['dit', 'sit', 'uat', 'perf', 'prod'];
 
         ctrl.load = function() {
             // verify that a valid mapping exists

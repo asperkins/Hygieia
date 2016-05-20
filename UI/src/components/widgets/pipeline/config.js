@@ -13,9 +13,9 @@
         // make sure mappings property is available
         ctrl.environmentsDropdownDisabled = true;
         ctrl.environmentMappings = [
-            { key: 'dev', value: null },
-            { key: 'qa', value: null },
-            { key: 'int', value: null },
+            { key: 'dit', value: null },
+            { key: 'sit', value: null },
+            { key: 'uat', value: null },
             { key: 'perf', value: null },
             { key: 'prod', value: null }
         ];
