@@ -4,7 +4,7 @@ FROM docker.io/java:openjdk-8-jdk
 MAINTAINER Hygieia@capitalone.com
 
 RUN \
-  mkdir /hygieia
+  mkdir /hygieia && apt-get -y install vim
 
 COPY *.jar /hygieia/
 COPY stash-properties-builder.sh /hygieia/
