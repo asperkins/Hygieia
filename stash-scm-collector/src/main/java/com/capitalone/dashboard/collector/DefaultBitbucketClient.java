@@ -37,7 +37,7 @@ import java.util.TimeZone;
 
 
 public class DefaultBitbucketClient implements GitClient {
-	private static final Log LOG = LogFactory.getLog(DefaultStashClient.class);
+	private static final Log LOG = LogFactory.getLog(DefaultBitbucketClient.class);
 
 	private static final int FIRST_RUN_HISTORY_DEFAULT = 14;
 
