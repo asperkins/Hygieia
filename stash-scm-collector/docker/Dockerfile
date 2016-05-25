@@ -7,7 +7,7 @@ ENV http_proxy="http://http.proxy.fmr.com:8000"
 ENV https_proxy="http://http.proxy.fmr.com:8000"
 
 RUN \
-  mkdir /hygieia && apt-get -y install vim
+  mkdir /hygieia && apt-get -y update && apt-get -y install vim
 
 COPY *.jar /hygieia/
 COPY stash-properties-builder.sh /hygieia/
