@@ -8,7 +8,6 @@ import com.capitalone.dashboard.util.Supplier;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.joda.time.DateTime;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -18,7 +17,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestOperations;
 
@@ -33,13 +31,13 @@ import java.util.List;
 import java.util.TimeZone;
 
 /**
- * BitbucketClient implementation that uses SVNKit to fetch information about
+ * StashClient implementation that uses SVNKit to fetch information about
  * Subversion repositories.
  */
 
-@Component
+
 public class DefaultBitbucketClient implements GitClient {
-	private static final Log LOG = LogFactory.getLog(DefaultBitbucketClient.class);
+	private static final Log LOG = LogFactory.getLog(DefaultStashClient.class);
 
 	private static final int FIRST_RUN_HISTORY_DEFAULT = 14;
 
@@ -49,7 +47,7 @@ public class DefaultBitbucketClient implements GitClient {
 
 	@Autowired
 	public DefaultBitbucketClient(GitSettings settings,
-			Supplier<RestOperations> restOperationsSupplier) {
+														Supplier<RestOperations> restOperationsSupplier) {
 		this.settings = settings;
 		this.restOperations = restOperationsSupplier.get();
 	}
@@ -130,12 +128,11 @@ public class DefaultBitbucketClient implements GitClient {
 
 				for (Object item : jsonArray) {
 					JSONObject jsonObject = (JSONObject) item;
-					String sha = str(jsonObject, "hash");
+					String sha = str(jsonObject, "id");
 					JSONObject authorObject = (JSONObject) jsonObject.get("author");
 					String message = str(jsonObject, "message");
-					String author = str(authorObject, "raw");
-					long timestamp = new DateTime(str(jsonObject, "date")).getMillis();
-					
+					String author = str(authorObject, "name");
+					long timestamp = Long.valueOf(str(jsonObject,"authorTimestamp"));
 					Commit commit = new Commit();
 					commit.setTimestamp(System.currentTimeMillis());
 					commit.setScmUrl(repo.getRepoUrl());
@@ -188,7 +185,7 @@ public class DefaultBitbucketClient implements GitClient {
 	}
 
 	private ResponseEntity<String> makeRestCall(String url, String userId,
-			String password) {
+																							String password) {
 		// Basic Auth only.
 		if (!"".equals(userId) && !"".equals(password)) {
 			return restOperations.exchange(url, HttpMethod.GET,
@@ -211,7 +208,7 @@ public class DefaultBitbucketClient implements GitClient {
 		headers.set("Authorization", authHeader);
 		return headers;
 	}
-	
+
 	private JSONObject paresAsObject(ResponseEntity<String> response) {
 		try {
 			return (JSONObject) new JSONParser().parse(response.getBody());
