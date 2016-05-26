@@ -2,7 +2,7 @@
 node('master'){
   def mvnPath="/home/tcserver/.jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven_3.x/bin/"
   def javaHome="/opt/common/jdk1.8.0_60"
-  env.PATH= "${env.PATH}:${mvnPath}:{$javaHome}/bin"
+  env.PATH= "${mvnPath}:${javaHome}/bin:${env.PATH}"
   stage 'checkout'
     checkout scm
   stage 'build'

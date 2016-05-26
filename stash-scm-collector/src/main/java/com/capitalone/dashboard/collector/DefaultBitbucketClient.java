@@ -35,7 +35,7 @@ import java.util.TimeZone;
  * Subversion repositories.
  */
 
-
+@Component
 public class DefaultBitbucketClient implements GitClient {
 	private static final Log LOG = LogFactory.getLog(DefaultBitbucketClient.class);
 
