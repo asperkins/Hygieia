@@ -47,7 +47,9 @@ git.cron=${STASH_CRON:-0 0/5 * * * *}
     #mandatory
 git.host=${STASH_HOST:-mystashrepo.com/}
 git.api=${STASH_API:-/rest/api/1.0/}
-
+git.key=${STASH_KEY:-keyneeded}
+git.user_id=${STASH_USER:-a123}
+git.password
 #Maximum number of days to go back in time when fetching commits
 git.commitThresholdDays=${STASH_COMMIT_THRESHOLD_DAYS:-15}
 
